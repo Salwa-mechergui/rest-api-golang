@@ -18,7 +18,6 @@ func InitMigration() *gorm.DB {
 	fmt.Printf(dbString)
 	db, err := gorm.Open("postgres", dbString)
 	if err != nil {
-		// defer db.Close()
 		fmt.Println(err)
 	}
 	return db

@@ -7,6 +7,7 @@ import (
 	_ "github/reccrides/docs"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/subosito/gotenv"
 	httpSwagger "github.com/swaggo/http-swagger"
@@ -25,7 +26,7 @@ func Init() {
 // @contact.email salwa@craftfoundry.com
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:8080
+// @host localhost:8000
 // @BasePath /
 func main() {
 	fmt.Println("Starting the application...")
@@ -36,7 +37,13 @@ func main() {
 	// Start server
 	r := Router.SetupRouter()
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
-	// Listen and Serve in 0.0.0.0:8080
-	log.Fatal(http.ListenAndServe(":8000", r))
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8000"
+		log.Println("[-] No PORT environment variable detected. Setting to ", port)
+	}
+	// Listen and Serve in 0.0.0.0:8000
+	log.Fatal(http.ListenAndServe(":"+port, r))
 	fmt.Println("Terminating the application...")
 }
