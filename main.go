@@ -37,6 +37,6 @@ func main() {
 	r := Router.SetupRouter()
 	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 	// Listen and Serve in 0.0.0.0:8080
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8000", r))
 	fmt.Println("Terminating the application...")
 }
