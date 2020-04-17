@@ -1,0 +1,107 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample service for managing booking requests",
+        "title": "booking",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Yuso",
+            "email": "salwa@craftfoundry.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/agent": {
+            "get": {
+                "description": "Get description of all agents",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agents"
+                ],
+                "summary": "Get details of all agents",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.Agent"
+                        }
+                    }
+                }
+            }
+        },
+        "/agent/{id}": {
+            "get": {
+                "description": "Get details of agent corresponding to the input agents",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agents"
+                ],
+                "summary": "Get details for a given agent",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the agent",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.Agent"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Models.Agent": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "currentride": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "phonenumber": {
+                    "type": "integer"
+                },
+                "upcomingride": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

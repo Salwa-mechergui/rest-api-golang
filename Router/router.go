@@ -1,7 +1,7 @@
 package Router
 
 import (
-	"BookingAPI/Book/controllers"
+	"github/reccrides/controllers"
 
 	"github.com/gorilla/mux"
 )
@@ -10,7 +10,9 @@ import (
 func SetupRouter() *mux.Router {
 
 	router := mux.NewRouter()
-	router.HandleFunc("/agent/{Id}", controllers.GetEndpoint).Methods("GET")
+	// routes
+	router.HandleFunc("/login", controllers.CreateEndpoint).Methods("POST")
+	router.HandleFunc("/agent/{id}", controllers.GetByIdEndpoint).Methods("GET")
 	router.HandleFunc("/agent", controllers.GetAgentEndpoint).Methods("GET")
 	return router
 }

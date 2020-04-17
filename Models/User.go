@@ -8,14 +8,12 @@ import (
 //agent stuct
 type Agent struct {
 	gorm.Model
-	ID           uint   `json:"id"`
-	Firstname    string `json:"firstname"`
-	Lastname     string `json:"lastname"`
-	Email        string `json:"email"`
-	Phonenumber  int    `json:"phonenumber"`
-	Upcomingride int    `json:"upcomingride"`
-	Currentride  int    `json:"currentride"`
-	Comment      string `json:"comment"`
-	// Agentt       []Agent `gorm:"foreignkey:BookRefer"`
+	ID           int    `json:"id,omitempty"`
+	Firstname    string `json:"firstname,omitempty"`
+	Lastname     string `json:"lastname,omitempty"`
+	Email        string `json:"email,omitempty"`
+	Phonenumber  int    `json:"phonenumber,omitempty"`
+	Upcomingride int    `json:"upcomingride,omitempty"`
+	Currentride  int    `json:"currentride,omitempty"`
+	Comment      string `json:"comment,omitempty"`
 }
-

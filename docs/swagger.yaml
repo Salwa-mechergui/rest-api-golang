@@ -1,0 +1,71 @@
+basePath: /
+definitions:
+  Models.Agent:
+    properties:
+      comment:
+        type: string
+      currentride:
+        type: integer
+      email:
+        type: string
+      firstname:
+        type: string
+      id:
+        type: integer
+      lastname:
+        type: string
+      phonenumber:
+        type: integer
+      upcomingride:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: salwa@craftfoundry.com
+    name: Yuso
+  description: This is a sample service for managing booking requests
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: booking
+  version: "1.0"
+paths:
+  /agent:
+    get:
+      consumes:
+      - application/json
+      description: Get description of all agents
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.Agent'
+      summary: Get details of all agents
+      tags:
+      - agents
+  /agent/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details of agent corresponding to the input agents
+      parameters:
+      - description: ID of the agent
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.Agent'
+      summary: Get details for a given agent
+      tags:
+      - agents
+swagger: "2.0"

@@ -1,40 +1,43 @@
 package controllers
 
 import (
-	"BookingAPI/Book/Helpers"
-	"BookingAPI/Book/Models"
 	"encoding/json"
-	"fmt"
+	"github/reccrides/Helpers"
+	"github/reccrides/Models"
 	"net/http"
-	"strconv"
 
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/gorilla/mux"
 )
 
-// Init Agent var as a slice book struct
-var Agentt []Models.Agent
+// Init Agent var as a slice of Agent struct
+var agents []Models.Agent
 
-// Get all Agent
+//GetAgentEndpoint
+// @Summary Get details of all agents
+// @Description Get description of all agents
+// @Tags agents
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} Models.Agent
+// @Router /agent [get]
 func GetAgentEndpoint(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db := Helpers.InitMigration()
-	json.NewEncoder(w).Encode(db.Find(&Agentt))
+	json.NewEncoder(w).Encode(db.Find(&agents))
 }
 
-// Get single Agentt
-func GetEndpoint(w http.ResponseWriter, r *http.Request) {
+// GetByIdEndpoint godoc
+// @Summary Get details for a given agent
+// @Description Get details of agent corresponding to the input agents
+// @Tags agents
+// @Accept  json
+// @Produce  json
+// @Param  id path int true "ID of the agent"
+// @Success 200 {object} Models.Agent
+// @Router /agent/{id} [get]
+func GetByIdEndpoint(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	// Gets params
-	// Loop through Agent and find one with the phonenumber from the params
-	for _, item := range Agentt {
-		id, err1 := strconv.ParseUint(r.FormValue("id"), 10, 32)
-		if err1 != nil {
-			fmt.Println(err1)
-		}
-		if uint(id) == item.ID {
-			json.NewEncoder(w).Encode(item)
-			return
-		}
-	}
-	json.NewEncoder(w).Encode(&Models.Agent{})
+	db := Helpers.InitMigration()
+	params := mux.Vars(r)
+	json.NewEncoder(w).Encode(db.Find(&agents, params["id"]))
 }
