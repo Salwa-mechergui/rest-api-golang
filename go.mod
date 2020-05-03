@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/golang/protobuf v1.3.1
 	github.com/gorilla/mux v1.7.3
 	github.com/jinzhu/gorm v1.9.12
 	github.com/lib/pq v1.3.0 // indirect

@@ -18,7 +18,7 @@ func Init() {
 	gotenv.Load()
 }
 
-// @title booking
+// @title rideCreation
 // @version 1.0
 // @description This is a sample service for managing booking requests
 // @termsOfService http://swagger.io/terms/

@@ -32,9 +32,9 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/agent": {
+        "/companies": {
             "get": {
-                "description": "Get description of all agents",
+                "description": "Get description of all companies",
                 "consumes": [
                     "application/json"
                 ],
@@ -42,22 +42,22 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "agents"
+                    "companies"
                 ],
-                "summary": "Get details of all agents",
+                "summary": "Get details of all companies",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Models.Agent"
+                            "$ref": "#/definitions/Models.Company"
                         }
                     }
                 }
             }
         },
-        "/agent/{id}": {
+        "/frontUser": {
             "get": {
-                "description": "Get details of agent corresponding to the input agents",
+                "description": "Get description of all front_end_users",
                 "consumes": [
                     "application/json"
                 ],
@@ -65,13 +65,36 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "agents"
+                    "front_end_users"
                 ],
-                "summary": "Get details for a given agent",
+                "summary": "Get details of all front_end_users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.Front_end_user"
+                        }
+                    }
+                }
+            }
+        },
+        "/frontUser/{id}": {
+            "get": {
+                "description": "Get details of agent corresponding to the input front_end_users",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "front_end_users"
+                ],
+                "summary": "Get details for a given front_end_users",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "ID of the agent",
+                        "description": "ID of the Front_end_users",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -81,7 +104,30 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Models.Agent"
+                            "$ref": "#/definitions/Models.Front_end_user"
+                        }
+                    }
+                }
+            }
+        },
+        "/passenger": {
+            "get": {
+                "description": "Get description of all passengers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "passengers"
+                ],
+                "summary": "Get details of all passengers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.Passenger"
                         }
                     }
                 }
@@ -89,32 +135,111 @@ var doc = `{
         }
     },
     "definitions": {
-        "Models.Agent": {
+        "Models.Company": {
             "type": "object",
             "properties": {
-                "comment": {
-                    "type": "string"
-                },
-                "currentride": {
-                    "type": "integer"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "firstname": {
+                "default_comment": {
                     "type": "string"
                 },
                 "id": {
                     "type": "integer"
                 },
-                "lastname": {
+                "name": {
                     "type": "string"
                 },
-                "phonenumber": {
+                "referral_code": {
+                    "type": "string"
+                },
+                "saas_company_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "Models.Front_end_user": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "default_comment": {
+                    "type": "string"
+                },
+                "default_passenger_id": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "front_end_user_id": {
                     "type": "integer"
                 },
-                "upcomingride": {
+                "id_front_user": {
                     "type": "integer"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "referral_code": {
+                    "type": "string"
+                },
+                "saas_company_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Models.Passenger": {
+            "type": "object",
+            "properties": {
+                "company_id": {
+                    "type": "integer"
+                },
+                "customer_id": {
+                    "type": "string"
+                },
+                "default_comment": {
+                    "type": "string"
+                },
+                "default_favorite_id": {
+                    "type": "integer"
+                },
+                "deleted": {
+                    "type": "boolean"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "send_invoice": {
+                    "type": "boolean"
+                },
+                "show_price": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         }
@@ -133,10 +258,10 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "localhost:8080",
+	Host:        "localhost:8000",
 	BasePath:    "/",
 	Schemes:     []string{},
-	Title:       "booking",
+	Title:       "rideCreation",
 	Description: "This is a sample service for managing booking requests",
 }
 

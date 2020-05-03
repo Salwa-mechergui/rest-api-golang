@@ -1,25 +1,77 @@
 basePath: /
 definitions:
-  Models.Agent:
+  Models.Company:
     properties:
-      comment:
-        type: string
-      currentride:
-        type: integer
-      email:
-        type: string
-      firstname:
+      default_comment:
         type: string
       id:
         type: integer
-      lastname:
+      name:
         type: string
-      phonenumber:
+      referral_code:
+        type: string
+      saas_company_id:
+        type: string
+    type: object
+  Models.Front_end_user:
+    properties:
+      Name:
+        type: string
+      default_comment:
+        type: string
+      default_passenger_id:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      front_end_user_id:
         type: integer
-      upcomingride:
+      id_front_user:
+        type: integer
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      referral_code:
+        type: string
+      saas_company_id:
         type: integer
     type: object
-host: localhost:8080
+  Models.Passenger:
+    properties:
+      company_id:
+        type: integer
+      customer_id:
+        type: string
+      default_comment:
+        type: string
+      default_favorite_id:
+        type: integer
+      deleted:
+        type: boolean
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      language:
+        type: string
+      last_name:
+        type: string
+      locale:
+        type: string
+      phone_number:
+        type: string
+      send_invoice:
+        type: boolean
+      show_price:
+        type: string
+      type:
+        type: string
+    type: object
+host: localhost:8000
 info:
   contact:
     email: salwa@craftfoundry.com
@@ -29,31 +81,46 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: booking
+  title: rideCreation
   version: "1.0"
 paths:
-  /agent:
+  /companies:
     get:
       consumes:
       - application/json
-      description: Get description of all agents
+      description: Get description of all companies
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Models.Agent'
-      summary: Get details of all agents
+            $ref: '#/definitions/Models.Company'
+      summary: Get details of all companies
       tags:
-      - agents
-  /agent/{id}:
+      - companies
+  /frontUser:
     get:
       consumes:
       - application/json
-      description: Get details of agent corresponding to the input agents
+      description: Get description of all front_end_users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.Front_end_user'
+      summary: Get details of all front_end_users
+      tags:
+      - front_end_users
+  /frontUser/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details of agent corresponding to the input front_end_users
       parameters:
-      - description: ID of the agent
+      - description: ID of the Front_end_users
         in: path
         name: id
         required: true
@@ -64,8 +131,23 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Models.Agent'
-      summary: Get details for a given agent
+            $ref: '#/definitions/Models.Front_end_user'
+      summary: Get details for a given front_end_users
       tags:
-      - agents
+      - front_end_users
+  /passenger:
+    get:
+      consumes:
+      - application/json
+      description: Get description of all passengers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.Passenger'
+      summary: Get details of all passengers
+      tags:
+      - passengers
 swagger: "2.0"
